@@ -1,0 +1,107 @@
+{
+  "Coastal": [
+    {
+      "id": 2892,
+      "name": "BARRELLI CREEK",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-122.975149887726, 38.7517135905485]
+      }
+    },
+
+    {
+      "id": 2619,
+      "name": "FREI RANCH",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-122.914889180169, 38.666453629775]
+      }
+    },
+
+    {
+      "id": 2653,
+      "name": "MONTE ROSSO",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-122.465045438822, 38.3369780992151]
+      }
+    },
+
+    {
+      "id": 2692,
+      "name": "WILLIAM HILL RANCH",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-122.276257659672, 38.3532738873142]
+      }
+    }
+  ],
+  "Valley": [
+    {
+      "id": 2685,
+      "name": "BORDEN HILLS",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-121.10655919803, 38.2941909455856]
+      }
+    },
+    {
+      "id": 2177,
+      "name": "COWELL RANCH",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-120.555600247361, 37.4754283617116]
+      }
+    },
+    {
+      "id": 2649,
+      "name": "LIBERTY LODI",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-121.23444221093, 38.1788792973382]
+      }
+    },
+    {
+      "id": 2438,
+      "name": "LIVINGSTON RANCHES",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-120.809329007598, 37.3651080352665]
+      }
+    },
+    {
+      "id": 2667,
+      "name": "VALLEY OAK",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-121.38024852967, 38.2546535888219]
+      }
+    }
+  ],
+  "Southern": [
+    {
+      "id": 2638,
+      "name": "BRIDLEWOOD VYD",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-120.083069694088, 34.6534314151985]
+      }
+    },
+    {
+      "id": 3004,
+      "name": "EDNA VALLEY",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-120.606247480242, 35.2145817938914]
+      }
+    },
+    {
+      "id": 2889,
+      "name": "SUNNYBROOK RANCH",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-120.597086635806, 35.5645279536621]
+      }
+    }
+  ]
+}
