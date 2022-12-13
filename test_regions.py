@@ -39,10 +39,8 @@ class TestRegions(unittest.TestCase):
                 'temp': 282.21,
                 'uvi': 2.55,
                 'visibility': 10000,
-                'weather': [{'description': 'scattered clouds',
-                    'icon': '03d',
-                    'id': 802,
-                    'main': 'Clouds'}],
+                'weather': {'description': 'scattered clouds',
+                    'main': 'Clouds'},
                 'wind_deg': 360,
                 'wind_gust': 13.89,
                 'wind_speed': 8.75}}

@@ -75,7 +75,7 @@ def regions():
     db = get_db_connection()
     result = db.execute('SELECT DISTINCT region FROM locations').fetchall()
     try:
-        accept_header = request.headers.get(header)
+        accept_header = request.headers.get('Accept')
     except:
         accept_header = "text/json"
     return format_response(accept_header, result, "Regions2:")
@@ -89,7 +89,7 @@ def region(region):
     db = get_db_connection()
     result = db.execute('SELECT name FROM locations WHERE region == ?', [region.capitalize()]).fetchall()
     try:
-        accept_header = request.headers.get(header)
+        accept_header = request.headers.get('Accept')
     except:
         accept_header = "text/json"
     if 'request' in globals():
@@ -106,7 +106,7 @@ def locations():
         result = db.execute('SELECT region, name FROM locations').fetchall()
         db.close()
         try:
-            accept_header = request.headers.get(header)
+            accept_header = request.headers.get('Accept')
         except:
             accept_header = "text/json"
         if 'request' in globals():
@@ -125,7 +125,7 @@ def location(location):
         result = db.execute('SELECT region, name, coordinates FROM locations WHERE name == ?', [location.upper()]).fetchall()
         db.close()
         try:
-            accept_header = request.headers.get(header)
+            accept_header = request.headers.get('Accept')
         except:
             accept_header = "text/json"
         if 'request' in globals():
@@ -162,7 +162,7 @@ def weather(location):
         del payload["current"]["weather"][0]["icon"]
         payload["current"]["weather"] = payload["current"]["weather"][0]
         try:
-            accept_header = request.headers.get(header)
+            accept_header = request.headers.get('Accept')
         except:
             accept_header = "text/json"
         if 'request' in globals():
