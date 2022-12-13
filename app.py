@@ -28,6 +28,7 @@ def setup_db():
         db.executescript(schema_file.read())
     data_file = open('data.json')
     data_json = json.load(data_file)
+    data_file.close()
     for region in data_json:
         for entry in data_json[region]:
             db["locations"].insert({"region": region, "name": entry["name"], "coordinates": entry["geometry"]["coordinates"]})
@@ -73,8 +74,11 @@ app = Flask(__name__)
 def regions():
     db = get_db_connection()
     result = db.execute('SELECT DISTINCT region FROM locations').fetchall()
-    if 'request' in globals():
-        return format_response(request.headers.get("Accept"), result, "Regions2:")
+    try:
+        accept_header = request.headers.get(header)
+    except:
+        accept_header = "text/json"
+    return format_response(accept_header, result, "Regions2:")
     return result
 
 #############################################################
@@ -84,8 +88,12 @@ def regions():
 def region(region):
     db = get_db_connection()
     result = db.execute('SELECT name FROM locations WHERE region == ?', [region.capitalize()]).fetchall()
+    try:
+        accept_header = request.headers.get(header)
+    except:
+        accept_header = "text/json"
     if 'request' in globals():
-        return format_response(request.headers.get("Accept"), result, "Region:")
+        return format_response(accept_header, result, "Region:")
     return result
 
 #############################################################
@@ -97,8 +105,12 @@ def locations():
     if validate_db(db):
         result = db.execute('SELECT region, name FROM locations').fetchall()
         db.close()
+        try:
+            accept_header = request.headers.get(header)
+        except:
+            accept_header = "text/json"
         if 'request' in globals():
-            return format_response(request.headers.get("Accept"), result, "Locations:")
+            return format_response(accept_header, result, "Locations:")
         return result
     else:
         return "Table not found, perhaps you need to load /ingest first"
@@ -112,8 +124,12 @@ def location(location):
     if validate_db(db):
         result = db.execute('SELECT region, name, coordinates FROM locations WHERE name == ?', [location.upper()]).fetchall()
         db.close()
+        try:
+            accept_header = request.headers.get(header)
+        except:
+            accept_header = "text/json"
         if 'request' in globals():
-            return format_response(request.headers.get("Accept"), result, "Location:")
+            return format_response(accept_header, result, "Location:")
         return result
     else:
         return "Table not found, perhaps you need to load /ingest first"
@@ -130,16 +146,26 @@ def weather(location):
         longitude = json.loads(db_result[0][0])[0]
         latitude = json.loads(db_result[0][0])[1]
         response = requests.get(f"{openweather_api_path}&lat={latitude}&lon={longitude}").json()
+        try:
+            response = json.loads(requests.get(f"{openweather_api_path}&lat={latitude}&lon={longitude}").json())
+        except:
+            mock_file = open('openweather.txt')
+            response = json.load(mock_file)
+            mock_file.close()
         payload = {
                 "region": db_result[0][1],
-                "name": location.upper(),upper,
+                "name": location.upper(),
                 "coordinates": db_result[0][0],
-                "current_weather": json.loads(response)["current"],
+                "current": response["current"]
                 }
-        del payload["current"]["id"]
-        del payload["current"]["icon"]
+        #del payload["current"]["id"]
+        #del payload["current"]["icon"]
+        try:
+            accept_header = request.headers.get(header)
+        except:
+            accept_header = "text/json"
         if 'request' in globals():
-            return format_response(request.headers.get("Accept"), payload, "Weather Data:")
+            return format_response(accept_header, payload, "Weather Data:")
         return response
     else:
         return "Table not found, perhaps you need to load /ingest first"
