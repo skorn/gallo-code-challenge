@@ -61,10 +61,10 @@ def format_response(header, response, title):
 
 #############################################################
 #############################################################
-# Flask configuration
+# Flask configuration and initialization
 #############################################################
 #############################################################
-setup_db() # First time setup before flask starts to populate data
+setup_db()
 app = Flask(__name__)
 
 #############################################################
@@ -158,8 +158,9 @@ def weather(location):
                 "coordinates": db_result[0][0],
                 "current": response["current"]
                 }
-        #del payload["current"]["id"]
-        #del payload["current"]["icon"]
+        del payload["current"]["weather"][0]["id"]
+        del payload["current"]["weather"][0]["icon"]
+        payload["current"]["weather"] = payload["current"]["weather"][0]
         try:
             accept_header = request.headers.get(header)
         except:
